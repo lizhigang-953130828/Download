@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.DownloadMapper" >
+  <resultMap id="BaseResultMap" type="com.bean.DownloadRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="packetNo" property="packetNo" jdbcType="VARCHAR" />
+    <result column="appId" property="appId" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="downloadReqNum" property="downloadNum" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+  </resultMap>
+
+
+  <insert id="insert" parameterType="com.bean.DownloadRecord" keyProperty="id" useGeneratedKeys="true">
+  insert into downloadrecord
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="packetNo != null" >
+        packetNo,
+      </if>
+      <if test="appNo != null" >
+        appNo,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="downloadNum != null" >
+        downloadNum,
+      </if>
+      <if test="date != null" >
+        `date`,
+      </if>
+      <if test="time != null" >
+        `time`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="packetNo != null" >
+        #{packetNo},
+      </if>
+      <if test="appNo != null" >
+        #{appNo},
+      </if>
+      <if test="ip != null" >
+        #{ip},
+      </if>
+      <if test="downloadNum != null" >
+        #{downloadNum},
+      </if>
+      <if test="date != null" >
+        #{date},
+      </if>
+      <if test="time != null" >
+        #{time},
+      </if>
+    </trim>
+  </insert>
+
+
+  <update id="update" parameterType="java.lang.String">
+    update downloadrecord set downloadNum=downloadNum+1, downloadDate=#{arg1} where id=#{arg0}
+  </update>
+
+</mapper>
